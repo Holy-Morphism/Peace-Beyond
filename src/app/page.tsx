@@ -4,7 +4,7 @@ export default function Home() {
       id="hero-section"
       className="h-full flex flex-row items-center justify-center"
     >
-      <h1>Home</h1>
+      <h1 className="text-white text-5xl font-semibold">Home</h1>
     </main>
   );
 }
