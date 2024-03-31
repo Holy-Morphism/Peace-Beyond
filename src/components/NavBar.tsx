@@ -14,6 +14,24 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function NavBar() {
+  interface NavBarLinksClassName {
+    className: string;
+    href: string;
+    name: string;
+  }
+
+  function NavBarLinks(props: NavBarLinksClassName) {
+    return (
+      <NavigationMenuItem className={props.className}>
+        <Link href={props.href} legacyBehavior passHref>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            {props.name}
+          </NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+    );
+  }
+
   return (
     <nav className="flex flex-row justify-between items-center p-1">
       <Link href="/">
@@ -21,30 +39,11 @@ export default function NavBar() {
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/signup" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Sign Up
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/login" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Log In
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          <NavBarLinks href="/" className="" name="Home" />
+          <NavBarLinks href="/signup" className="" name="Sign Up" />
+          <NavBarLinks href="/login" className="" name="Log In" />
         </NavigationMenuList>
       </NavigationMenu>
     </nav>
   );
-  
 }

@@ -25,15 +25,11 @@ const formSchema = z.object({
 });
 
 export default function LogInForm() {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -41,7 +37,7 @@ export default function LogInForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" space-y-5 w-80 m-5 "
+        className="space-y-5 w-80 m-5"
       >
         <FormField
           control={form.control}

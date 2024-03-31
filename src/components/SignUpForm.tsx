@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,15 +39,11 @@ const formSchema = z
   });
 
 export function SignUpForm() {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -56,7 +51,7 @@ export function SignUpForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" space-y-5 w-80 m-5 "
+        className="space-y-5 w-80 m-5"
       >
         <FormField
           control={form.control}
@@ -116,7 +111,9 @@ export function SignUpForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full text-bold text-white">
+          Submit
+        </Button>
       </form>
     </Form>
   );
