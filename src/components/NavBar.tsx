@@ -1,4 +1,5 @@
 "use client";
+import Title from "@/components/Title";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -16,7 +17,7 @@ export default function NavBar() {
   return (
     <nav className="flex flex-row justify-between items-center p-1">
       <Link href="/">
-        <h1 className="font-bold p-2">Peace & Beyond</h1>
+        <Title className="font-bold text-lg p-2" />
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
@@ -45,4 +46,5 @@ export default function NavBar() {
       </NavigationMenu>
     </nav>
   );
+  
 }

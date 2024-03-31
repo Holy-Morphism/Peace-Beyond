@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter as FontSans } from "next/font/google";
-
+import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/NavBar";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const myFont = localFont({
+  src: "../../public/fonts/CaniculeDisplayv0.1-Regular.Trial.otf",
+  variable: "--font-CaniculeDisplay",
 });
+
 export const metadata: Metadata = {
   title: "Peace & Beyond",
   description: "Come Travel with Us",
@@ -23,8 +23,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen h-dvh bg-background font-sans antialiased flex flex-col",
-          fontSans.variable
+          "min-h-screen h-dvh bg-background font-CaniculeDisplay antialiased flex flex-col ",
+          myFont.variable
         )}
       >
         <NavBar />

@@ -20,7 +20,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        CaniculeDisplay: ["var(--font-CaniculeDisplay)", ...fontFamily.serif],
       },
       colors: {
         border: "hsl(var(--border))",
