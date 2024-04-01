@@ -33,13 +33,13 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="flex flex-row justify-between items-center p-1">
+    <nav className="flex flex-row justify-between items-center p-1 ">
       <Link href="/">
         <Title className="font-bold text-lg p-2" />
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
-          <NavBarLinks href="/" className="" name="Home" />
+          <NavBarLinks href="/" className="bg-transparent" name="Home" />
           <NavBarLinks href="/signup" className="" name="Sign Up" />
           <NavBarLinks href="/login" className="" name="Log In" />
         </NavigationMenuList>
