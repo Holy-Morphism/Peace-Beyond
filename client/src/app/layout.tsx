@@ -3,12 +3,17 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/NavBar";
+import { Roboto } from "next/font/google";
 
 const myFont = localFont({
   src: "../../public/fonts/CaniculeDisplayv0.1-Regular.Trial.otf",
   variable: "--font-CaniculeDisplay",
 });
 
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+});
 export const metadata: Metadata = {
   title: "Peace & Beyond",
   description: "Come Travel with Us",
@@ -23,7 +28,8 @@ export default function RootLayout({
     <html lang="en" className="h-dvh w-dvw m-0 p-0" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen h-dvh bg-background font-CaniculeDisplay antialiased flex flex-col ",
+          "min-h-screen h-dvh bg-background antialiased flex flex-col ",
+          roboto,
           myFont.variable
         )}
       >

@@ -41,8 +41,8 @@ export default function NavBar() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavBarLinks href="/" className="bg-transparent" name="Home" />
-          <NavBarLinks href="/signup" className="" name="Sign Up" />
-          <NavBarLinks href="/login" className="" name="Log In" />
+          <NavBarLinks href="/auth/signup" className="" name="Sign Up" />
+          <NavBarLinks href="/auth/login" className="" name="Log In" />
         </NavigationMenuList>
       </NavigationMenu>
     </nav>

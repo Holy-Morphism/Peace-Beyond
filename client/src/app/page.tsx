@@ -1,5 +1,4 @@
 import Title from "@/components/Title";
-import Username from "@/components/Username";
 
 export default function Home() {
   return (
