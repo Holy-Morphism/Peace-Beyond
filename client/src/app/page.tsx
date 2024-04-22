@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/Footer";
 import Title from "@/components/Title";
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
         />
         <Title className="text-white text-9xl fade-in-5 z-10 relative" />
       </main>
-      <div className="h-dvh"></div>
+     
     </div>
   );
 }
