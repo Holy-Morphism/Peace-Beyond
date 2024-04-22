@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navbar/NavBar";
 import { Roboto } from "next/font/google";
 
 const myFont = localFont({
@@ -25,10 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-dvh w-dvw m-0 p-0" suppressHydrationWarning>
+    <html lang="en" className="m-0 p-0" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen h-dvh bg-background antialiased flex flex-col ",
+          "min-h-screen h-full bg-background antialiased",
           roboto,
           myFont.variable
         )}
