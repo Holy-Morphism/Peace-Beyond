@@ -11,7 +11,7 @@ Peace & Beyond is a dynamic travel itinerary planner that not only helps users p
 1. **Clone the repository**: Clone the Peace & Beyond repository to your local machine using the following command:
 
 ```
-git clone <insert your GitHub repository link here>
+git clone https://github.com/Holy-Morphism/Peace-Beyond
 ```
 
 2. **Install MongoDB**: Peace & Beyond uses MongoDB as its database. If you don't have MongoDB installed, you can download it from [here](https://www.mongodb.com/try/download/community).
@@ -65,4 +65,3 @@ Now, you should be able to access the application at `http://localhost:3000` (or
 ## Future Enhancements
 
 The AR features and language translation capabilities are currently under consideration and may be added in future updates.
-
