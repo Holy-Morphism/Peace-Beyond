@@ -1,4 +1,4 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
@@ -8,15 +8,15 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
-// mongoose
-//   .connect("mongodb://localhost:27017/peace-and-beyond")
-//   .then(() => {
-//     console.log("Successfully connected to MongoDB");
-//   })
-//   .catch((error) => {
-//     console.error("Error connecting to MongoDB", error);
-//     process.exit(1);
-//   });
+mongoose
+  .connect("mongodb://0.0.0.0:27017/peace-and-beyond")
+  .then(() => {
+    console.log("Successfully connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB", error);
+    process.exit(1);
+  });
 
 app.use(userRoutes);
 
