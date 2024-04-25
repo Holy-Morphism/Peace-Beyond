@@ -56,7 +56,7 @@ export function SignUpForm() {
       });
     } else {
       const { confirmPassword, ...userData } = data;
-      const res = await fetch("http://localhost:8080/api/signin", {
+      const res = await fetch("http://localhost:8080/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

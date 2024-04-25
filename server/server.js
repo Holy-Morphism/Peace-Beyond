@@ -1,15 +1,16 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const app = express();
-const PORT = 8080;
-
+const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect("mongodb://0.0.0.0:27017/peace-and-beyond")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Successfully connected to MongoDB");
   })
@@ -18,7 +19,7 @@ mongoose
     process.exit(1);
   });
 
-app.use(userRoutes);
+app.use("/api",userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
