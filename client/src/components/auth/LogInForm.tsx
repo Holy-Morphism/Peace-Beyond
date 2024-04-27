@@ -19,6 +19,7 @@ import { z } from "zod";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import Link from "next/link";
+import { login } from "@/api/authServices";
 
 export function LogInForm() {
   const [loading, setLoading] = useState(false);
@@ -34,24 +35,18 @@ export function LogInForm() {
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
     setLoading(true);
-    const res = await fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
 
-    const body = await res.json();
-    if (body.status === "error") {
+    const res = await login(data);
+    
+    if (res.status === "error") {
       toast({
         variant: "destructive",
         title: "Error",
-        description: body.error,
+        description: res.error,
       });
     } else {
       toast({
-        title: `Welcome Back ${body.name}`,
+        title: `Welcome Back ${res.name}`,
         description: (
           <div>
             <p>

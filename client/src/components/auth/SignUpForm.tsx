@@ -21,6 +21,7 @@ import CardWrapper from "./card-wrapper";
 import { z } from "zod";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
+import { signUp } from "@/api/authServices";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState(false);
@@ -56,15 +57,7 @@ export function SignUpForm() {
       });
     } else {
       const { confirmPassword, ...userData } = data;
-      const res = await fetch("http://localhost:8080/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-      //if data not
-      const body = await res.json();
+      const body = await signUp(userData);
       console.log(body.error);
       if (body.status === "error") {
         toast({

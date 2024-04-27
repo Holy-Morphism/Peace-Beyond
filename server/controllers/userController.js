@@ -7,9 +7,9 @@ const createToken = (id) => {
 };
 
 const signUpUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   try {
-    const user = await User.signup(name, email, password);
+    const user = await User.signup(firstName, lastName, email, password);
     //convert ObjectID to string
     const id = user._id.toString();
     // Create a token
@@ -22,21 +22,18 @@ const signUpUser = async (req, res) => {
 };
 
 const logInUser = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.json({ status: "error", error: "Invalid email/password" });
-    } // Check if the password is correct
-    else if (await bcrypt.compare(password, user.password)) {
-      // The password is correct
-      return res.json({ status: "ok", data: user });
-    } else {
-      // The password is incorrect
-      return res.json({ status: "error", error: "Invalid email/password" });
-    }
+    const user = await User.login(email, password);
+
+    //obtain id form ObjectId
+    const id = user._id.toString();
+    //create token
+    const token = createToken(id);
+    res.json({ status: "ok", token });
   } catch (error) {
-    res.json({ status: "error", error: error });
+    res.json({ status: "error", error: error.message });
   }
 };
 
