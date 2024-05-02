@@ -26,7 +26,6 @@ const signUpUser = async (req, res) => {
 
 const logInUser = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await User.login(email, password);
     //obtain id form ObjectId
@@ -46,6 +45,7 @@ const logInUser = async (req, res) => {
 const getUser = async (req, res) => {
   const cookie = req.cookies.jwt;
   //check if jwt cookie exists
+  console.log(cookie);
   try {
     if (cookie) {
       console.log("cookie");

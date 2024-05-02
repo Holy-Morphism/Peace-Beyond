@@ -1,9 +1,7 @@
+"use server";
 
-
-import Router from "next/router";
-
-
-
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 interface userData {
     firstName: string;
     lastName: string;
@@ -32,16 +30,23 @@ export async function signUp(userData:userData) {
 export async function login(loginData:loginData) {
     const res = await fetch("http://localhost:8080/api/login", {
         method: "POST",
-        cache: "no-store",
+        credentials: "include",
         headers: {
         "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
     });
     const data = await res.json();
+    cookies().set({
+        name: 'jwt',
+        value: data.token,
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+        path: '/',
+      })
     console.log(data);
     if (data.status === "ok") {
-        Router.push("/dashboard");
+        redirect("/dashboard");
     }
     return data;
 }
@@ -62,13 +67,14 @@ export async function getUser() {
         cache: "no-store",
         credentials: "include",
         headers: {
+        Cookie: cookies().toString(),
         "Content-Type": "application/json",
         },
     });
     const data = await res.json();
     console.log(data);
     if (data.status === "error") {
-        Router.push("/login");
+       redirect("/login");
     }
     return data;
     }

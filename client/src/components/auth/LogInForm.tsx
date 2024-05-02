@@ -39,7 +39,6 @@ export function LogInForm() {
     setLoading(true);
     const res = await login(data);
     console.log(res);
-
     setLoading(false);
   };
 

@@ -1,24 +1,19 @@
-"use client";
+import { getUser, logout } from "@/api/auth"; // replace with your actual path
+import { Button } from "@/components/ui/button";
 
-import React, { useEffect, useState } from "react";
-import { getUser } from "@/api/auth"; // replace with your actual path
+const Dashboard = async () => {
+  const res = await getUser();
+  console.log(res);
 
-const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  if (res && res.status !== "error") {
+  }
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await getUser();
-      console.log(res);
-      if (res.status !== "error") {
-        setUser(res);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      Dashboard
+      <Button onClick={logout}>Logout</Button>
+    </div>
+  );
 };
 
 export default Dashboard;
