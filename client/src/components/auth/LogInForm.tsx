@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -19,10 +20,11 @@ import { z } from "zod";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import Link from "next/link";
-import { login } from "@/api/authServices";
+import { login } from "@/api/auth";
 
 export function LogInForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(LogInSchema),
@@ -35,32 +37,9 @@ export function LogInForm() {
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof LogInSchema>) => {
     setLoading(true);
-
     const res = await login(data);
-    
-    if (res.status === "error") {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: res.error,
-      });
-    } else {
-      toast({
-        title: `Welcome Back ${res.name}`,
-        description: (
-          <div>
-            <p>
-              <b>Email: </b>
-              {data.email}
-            </p>
-            <p>
-              <b>Password: </b>
-              {data.password}
-            </p>
-          </div>
-        ),
-      });
-    }
+    console.log(res);
+
     setLoading(false);
   };
 

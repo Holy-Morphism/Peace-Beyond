@@ -34,7 +34,6 @@ export default function RootLayout({
           myFont.variable
         )}
       >
-        <NavBar />
         {children}
         <Footer />
       </body>
