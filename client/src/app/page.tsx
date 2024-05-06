@@ -1,5 +1,7 @@
 import Footer from "@/components/footer/Footer";
+import Gallery from "@/components/gallery/Gallery";
 import Title from "@/components/Title";
+
 
 export default function Home() {
   return (
@@ -17,8 +19,9 @@ export default function Home() {
           src="/videos/bg-video.mp4"
         />
         <Title className="text-white text-9xl fade-in-5 z-10 relative" />
+        
       </main>
-     
+      <Gallery/>
     </div>
   );
 }
