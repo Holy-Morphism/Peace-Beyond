@@ -2,20 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-interface userData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    }
-
-interface loginData {
-    email: string;
-    password: string;
-}
+import { userData, loginData } from "@/types"; 
 
 export async function signUp(userData:userData) {
-  const res = await fetch("http://localhost:8080/api/signup", {
+  const res = await fetch("http://localhost:8080/api/user/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +18,7 @@ export async function signUp(userData:userData) {
 }
 
 export async function login(loginData:loginData) {
-    const res = await fetch("http://localhost:8080/api/login", {
+    const res = await fetch("http://localhost:8080/api/user/login", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -52,7 +42,7 @@ export async function login(loginData:loginData) {
 }
 
 export async function logout() {
-    const res = await fetch("http://localhost:8080/api/logout", {
+    const res = await fetch("http://localhost:8080/api/user/logout", {
         method: "GET",
         headers: {
         "Content-Type": "application/json",

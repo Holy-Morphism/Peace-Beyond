@@ -2,20 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getDestinations,
-    getDestination,
-    addDestination,
-    deleteDestination,
-    } = require("../controllers/destinationController");
+  getDestinations,
+  getDestination,
+  addDestination,
+  deleteDestination,
+} = require("../controllers/destinationController");
 
 // Get all destinations
-router.get("/destinations", getDestinations);
+router.get("/", getDestinations);
 
 // Get a destination
-router.get("/destinations/:id", getDestination);
+router.get("/:id", getDestination);
 
 // Add a destination
-router.post("/destinations", addDestination);
+router.post("/", addDestination);
 
 // Delete a destination
-router.delete("/destinations/:id", deleteDestination);
+router.delete("/:id", deleteDestination);
+
+module.exports = router;
