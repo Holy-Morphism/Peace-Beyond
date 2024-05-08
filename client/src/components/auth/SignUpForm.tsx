@@ -7,7 +7,6 @@ import { SignUpSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { useRouter } from "next/navigation";
 
 import {
   Form,
@@ -21,7 +20,7 @@ import CardWrapper from "./card-wrapper";
 import { z } from "zod";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
-import { signUp } from "@/api/authServices";
+import { signUp } from "@/api/auth";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState(false);
@@ -36,7 +35,7 @@ export function SignUpForm() {
     },
   });
   const { reset } = form;
-  const router = useRouter();
+
 
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
@@ -57,6 +56,7 @@ export function SignUpForm() {
       });
     } else {
       const { confirmPassword, ...userData } = data;
+
       const body = await signUp(userData);
       console.log(body.error);
       if (body.status === "error") {
@@ -67,7 +67,6 @@ export function SignUpForm() {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-        // router.push("/auth/emailverification");
 
         toast({
           title: "Account Created 🎉",

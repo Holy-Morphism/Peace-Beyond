@@ -73,4 +73,16 @@ User.statics.login = async function (email, password) {
   return user;
 };
 
+User.statics.logout = async function () {
+  return;
+};
+
+User.statics.getUser = async function (id) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+  return user;
+};
+
 module.exports = mongoose.model("User", User);
