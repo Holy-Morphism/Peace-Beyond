@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import NavBar from "@/components/navbar/NavBar";
 import { Roboto } from "next/font/google";
 import Footer from "@/components/footer/Footer";
-
+import Gallery from "@/components/gallery/Gallery";
 const myFont = localFont({
   src: "../../public/fonts/CaniculeDisplayv0.1-Regular.Trial.otf",
   variable: "--font-CaniculeDisplay",
@@ -35,6 +35,7 @@ export default function RootLayout({
         )}
       >
         {children}
+        
         <Footer />
       </body>
     </html>
