@@ -1,15 +1,12 @@
 import React from 'react'
-import Gallery, { houses } from '@/components/gallery/Gallery'
 import { Calendar } from '@/components/ui/calendar'
-import House from '@/components/house/House'
+
 const page = () => {
-    return (
-        <>
-          
-            <Calendar>
-            </Calendar>
-        </>
-    )
+  return (
+    <div>
+      <Calendar/>
+    </div>
+  )
 }
 
 export default page
