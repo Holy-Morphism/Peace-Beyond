@@ -7,6 +7,8 @@ export default function Home() {
       <Authlayout>
         <Header />
       </Authlayout>
+    
     </div>
+
   );
 }
