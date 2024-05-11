@@ -62,7 +62,6 @@ export async function getUser() {
         },
     });
     const data = await res.json();
-    console.log(data);
     if (data.status === "error") {
        redirect("/login");
     }

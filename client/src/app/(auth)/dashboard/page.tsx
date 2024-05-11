@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const Dashboard = async () => {
   const res = await getUser();
-  console.log(res);
+  //console.log(res);
 
   if (res && res.status !== "error") {
   }
@@ -11,7 +11,7 @@ const Dashboard = async () => {
   return (
     <div>
       Dashboard
-      <Button onClick={logout}>Logout</Button>
+      <Button onClick={ logout}>Logout</Button>
     </div>
   );
 };

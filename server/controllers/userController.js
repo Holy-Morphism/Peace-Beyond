@@ -45,10 +45,9 @@ const logInUser = async (req, res) => {
 const getUser = async (req, res) => {
   const cookie = req.cookies.jwt;
   //check if jwt cookie exists
-  console.log(cookie);
+
   try {
     if (cookie) {
-      console.log("cookie");
       const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
       const user = await User.getUser(decoded.id);
       res.json({ status: "ok", user });
