@@ -1,111 +1,47 @@
-// // import React from 'react'
-// // import { Calendar } from '@/components/ui/calendar'
-// // const data=[
-// //   {id:7,
-// //   image:"/images/Thailand.avif",
-// //   price:1500,
-// //   title:"Asia, Thailand",
-// //   description:"great place to visit"
-// // }
-// // ]
-
-// // const page = () => {
-// //   return (
-// //     <>
-// //     <div className="house pt-4 pb-4 m-2 ">
-// //       <div className="details">
-// //         <p></p>
-// //         <p></p>
-// //       </div>
-// //       <div className="image-loader"></div>
-// //       <img src="" alt="" />
-// //     </div>
-// //     <div>
-// //       <Calendar/>
-// //     </div>
-// //     </>
-// //   )
-// // }
-
-// // export default page
-// import React from 'react';
-// import { Calendar } from '@/components/ui/calendar';
-
-// const data = [
-//   {
-//     id: 7,
-//     image: "/images/Thailand.avif",
-//     price: 1500,
-//     title: "Asia, Thailand",
-//     description: "Great place to visit"
-//   }
-// ];
-
-// const Page = () => {
-//   const house = data[0]; // Assuming there's only one item in the data array
-
-//   return (
-//     <div>
-//       <div className="">
-//         <h2 className="text-2xl font-bold mb-2">{house.title}</h2>
-//         <p className="text-lg text-gray-600">{house.description}</p>
-//         <p className="text-xl font-bold mt-4">${house.price} per night</p>
-//       </div>
-
-//       {/* Banner Section */}
-//       <div className="bg-gray-300 p-8">
-//         <img src={house.image} alt={house.title} className="w-full h-30 mb-4 rounded-md" />
-//       </div>
-
-//       {/* Calendar Section */}
-//       <div className="absolute bottom-0 right-0 p-4">
-//         <Calendar />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Page;
-import React from 'react';
+'use client'
+import * as React from 'react';
+import Image from '@/components/image/Image';
 import { Calendar } from '@/components/ui/calendar';
+import Link from 'next/link';
+
 
 const data = [
   {
     id: 7,
-    image: "/images/Thailand.avif",
+    image: "/images/India.avif",
     price: 1500,
     title: "Asia, Thailand",
-    description: "Great place to visit",
-    Host:"Hosted by Syed Muhammad Fasil ul Hassan Zaidi"
+    view: "Great place. This place is close to the beach and has a great view.",
+    Host: "Syed Muhammad Fasil ul Hassan Zaidi",
+    description: "1 guest  1 room  1 bed "
   }
 ];
 
 const Page = () => {
-  const house = data[0]; 
-
+  const house = data[0];
   return (
-    <div>
-      {/* <div className=" border-slate-900 my-5 ">
-        <h2 className=" title text-2xl font-bold mb-2">{house.title}</h2>
-        <p className="description text-lg text-gray-600">{house.description}</p>
+    <>
+      <div className="flex flex-col mt-16 absolute left-0 top-0  mb-5 h-auto w-full">
+        <Image house={house} />
       </div>
-     */}
-     <div className="border-blue-500 border-solid border-4 p-4">
-     <h2 className=" title text-2xl font-bold mb-2">{house.title}</h2>
-        <p className="description text-lg text-gray-600">{house.description}</p>
-    </div>
-    <div className='grid grid-cols-3 gap-4'>
-      <div><p>{house.Host},{house.description},{house.price}{house.Host},{house.Host},{house.description},{house.price}{house.Host},{house.description},{house.price}{house.Host},{house.description},{house.price}{house.description},{house.price}</p></div>
-    <div className=" p-8 border-cyan-200">
-        <img src={house.image} alt={house.title} className="w-60 h-900 mb-4 rounded-md transform rotate-90"/>
+      <div className="grid grid-cols-2 gap-14 absolute bottom-0 w-full place-items-center ">
+        <div className=' h-auto w-auto'>
+          <h1 className="text-4xl bl">{house.title}</h1>
+          <h2 className="text-2xl text-gray-500">${house.price} night</h2>
+          <p className="text-2xl  text-black-900 "> <span className='text-gray-500'>Hosted by </span>{house.Host}</p>
+          <hr />
+          <p className="text-lg text-gray-500 ">{house.description}</p>
+          <hr />
+          <p className="text-lg text-gray-500 ">{house.view}</p> <i className="fa-solid fa-umbrella-beach"></i>
+          <button onClick={()=>{window.location.href='/trips';}} type="button" className=" mt-9 w-3/4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Reservation</button>
+        </div>
+        <div>
+          <Calendar/>
+        </div>
       </div>
-    <div className=" bottom right-0 p-4">
-        <Calendar />
-      </div>
-    </div>
-      
-    </div>
+
+    </>
   );
-}
+};
 
 export default Page;
