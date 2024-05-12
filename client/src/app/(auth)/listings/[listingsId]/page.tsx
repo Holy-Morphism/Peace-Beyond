@@ -3,7 +3,7 @@ import * as React from 'react';
 import Image from '@/components/image/Image';
 import { Calendar } from '@/components/ui/calendar';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { getDestination } from '@/api/destination';
 const data = [
   {
@@ -18,7 +18,7 @@ const data = [
 ];
 
 const Page = async() => {
-const {id}=useParams();
+const id=useSearchParams();
 console.log(id)
 const res=await getDestination(Number(id));
 console.log(res)
