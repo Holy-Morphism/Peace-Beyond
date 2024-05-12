@@ -1,4 +1,4 @@
-import { getUser, logout } from "@/api/auth"; // replace with your actual path
+import { getUser } from "@/api/auth"; // replace with your actual path
 import { Button } from "@/components/ui/button";
 
 const Dashboard = async () => {
@@ -8,12 +8,7 @@ const Dashboard = async () => {
   if (res && res.status !== "error") {
   }
 
-  return (
-    <div>
-      Dashboard
-      <Button onClick={ logout}>Logout</Button>
-    </div>
-  );
+  return <div className="h-full w-full flex justify-center items-center">Dashboard</div>;
 };
 
 export default Dashboard;

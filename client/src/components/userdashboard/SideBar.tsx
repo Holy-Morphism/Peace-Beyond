@@ -2,12 +2,11 @@
 
 import SideBarButton from "./SideBarButton";
 import { IoIosSettings, IoMdExit } from "react-icons/io";
-import { FaClipboardList } from "react-icons/fa";
+import { FaClipboardList, FaHeart } from "react-icons/fa";
 import { logout } from "@/api/auth";
-import { Button } from "../ui/button";
 
 const SideBar = () => {
-  const hlogout = async () => {
+  const handlelogout = async () => {
     try {
       await logout();
     } catch (error) {
@@ -26,10 +25,19 @@ const SideBar = () => {
         <SideBarButton
           icon={<FaClipboardList />}
           name="Orders"
-          href="/orders"
+          href="/dashboard/orders"
         />
-
-        <Button onClick={hlogout}> logout</Button>
+        <SideBarButton
+          icon={<FaHeart />}
+          name="Favourites"
+          href="/dashboard/favourites"
+        />
+        <SideBarButton
+          icon={<IoMdExit />}
+          name="Sign Out"
+          href="/"
+          onClick={handlelogout}
+        />
       </div>
     </div>
   );
