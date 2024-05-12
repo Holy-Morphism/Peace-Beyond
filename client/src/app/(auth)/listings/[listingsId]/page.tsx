@@ -3,8 +3,8 @@ import * as React from 'react';
 import Image from '@/components/image/Image';
 import { Calendar } from '@/components/ui/calendar';
 import Link from 'next/link';
-
-
+import { useParams } from 'next/navigation';
+import { getDestination } from '@/api/destination';
 const data = [
   {
     id: 7,
@@ -17,11 +17,15 @@ const data = [
   }
 ];
 
-const Page = () => {
-  const house = data[0];
+const Page = async() => {
+const {id}=useParams();
+console.log(id)
+const res=await getDestination(Number(id));
+console.log(res)
+
   return (
     <>
-      <div className="flex flex-col mt-16 absolute left-0 top-0  mb-5 h-auto w-full">
+      {/* <div className="flex flex-col mt-16 absolute left-0 top-0  mb-5 h-auto w-full">
         <Image house={house} />
       </div>
       <div className="grid grid-cols-2 gap-14 absolute bottom-0 w-full place-items-center ">
@@ -39,7 +43,9 @@ const Page = () => {
           <Calendar/>
         </div>
       </div>
+ */}
 
+ <div>123123</div>
     </>
   );
 };
