@@ -48,6 +48,13 @@ export async function logout() {
         "Content-Type": "application/json",
         },
     });
+    cookies().set({
+        name: 'jwt',
+        value: '',
+        httpOnly: true,
+        expires: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
+        path: '/',
+      })
     return res.json();
     }
 

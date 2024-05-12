@@ -60,8 +60,16 @@ const getUser = async (req, res) => {
 };
 
 const logOutUser = async (req, res) => {
-  res.cookie("jwt", "", { maxAge: 0 });
-  res.json({ status: "ok" });
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.json({ status: "ok" });
+    console.log("User logged out successfully");
+  } catch (error) {
+    console.error("An error occurred during logout:", error);
+    res
+      .status(500)
+      .json({ status: "error", message: "An error occurred during logout" });
+  }
 };
 
 module.exports = { signUpUser, logInUser, getUser, logOutUser };

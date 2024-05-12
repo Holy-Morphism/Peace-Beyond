@@ -1,4 +1,4 @@
-
+"use client";
 
 import SideBarButton from "./SideBarButton";
 import { IoIosSettings, IoMdExit } from "react-icons/io";
@@ -7,6 +7,14 @@ import { logout } from "@/api/auth";
 import { Button } from "../ui/button";
 
 const SideBar = () => {
+  const hlogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("An error occurred during logout:", error);
+    }
+  };
+
   return (
     <div className="h-full w-1/5 bg-color3">
       <div className="flex flex-col justify-center items-center">
@@ -20,8 +28,8 @@ const SideBar = () => {
           name="Orders"
           href="/orders"
         />
-      
-        <Button onClick={logout}> logout</Button>
+
+        <Button onClick={hlogout}> logout</Button>
       </div>
     </div>
   );
