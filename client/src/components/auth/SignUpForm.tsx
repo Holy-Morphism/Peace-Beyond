@@ -7,7 +7,6 @@ import { SignUpSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-
 import {
   Form,
   FormField,
@@ -19,10 +18,19 @@ import {
 import CardWrapper from "./card-wrapper";
 import { z } from "zod";
 import { useFormStatus } from "react-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { signUp } from "@/api/auth";
+import Image from "next/image";
 
 export function SignUpForm() {
+  const [avatarURL, setAvatarURL] = useState("/images/default.png");
+  const fileUploadRef = useRef(null);
+  const uploadImageDisplay = async () => {
+    const uploadedFile = fileUploadRef.current.files[0];
+    const cachedURL = URL.createObjectURL(uploadedFile);
+    setAvatarURL(cachedURL);
+  };
+
   const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(SignUpSchema),
@@ -32,14 +40,25 @@ export function SignUpForm() {
       email: "",
       password: "",
       confirmPassword: "",
+      profilePicture: { type: "image/jpeg" },
     },
   });
   const { reset } = form;
 
-
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     setLoading(true);
+    const result = SignUpSchema.safeParse(data);
+    if (!result.success) {
+      // Display the error message
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: result.error.message,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+      return;
+    }
     if (data.password !== data.confirmPassword) {
       toast({
         variant: "destructive",
@@ -67,7 +86,6 @@ export function SignUpForm() {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-
         toast({
           title: "Account Created 🎉",
           description: (
@@ -101,8 +119,27 @@ export function SignUpForm() {
       backButtonHref="/auth/login"
       backButtonLabel="Already have an account ? "
     >
+      <div className="flex justify-center rounded-full object-cover">
+        <Image
+          src={avatarURL || ""}
+          alt="Preview"
+          width={100}
+          height={100}
+          className="rounded-full object-cover"
+        />
+      </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <label htmlFor="file">Upload Image</label>
+          <input
+            id="file"
+            type="file"
+            accept="image/jpg"
+            ref={fileUploadRef}
+            onChange={uploadImageDisplay}
+            className="hidden"
+          />
+
           <div className="grid grid-cols-2 gap-2">
             <FormField
               control={form.control}
