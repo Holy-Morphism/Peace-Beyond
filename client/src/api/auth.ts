@@ -12,7 +12,7 @@ export async function signUp(userData:userData) {
     },
     body: JSON.stringify(userData),
   });
-   return  await res.json();
+  return  await res.json();
    
    
 }
