@@ -29,8 +29,8 @@ mongoose
     process.exit(1);
   });
 
-app.use("/api", userRoutes);
-app.use("/api", adminRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
