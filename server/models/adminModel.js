@@ -38,7 +38,7 @@ Admin.statics.signup = async function (firstName, lastName, email, password) {
 
   const exists = await this.findOne({ email });
   if (exists) {
-    throw Error("User already exists");
+    throw Error("Admin already exists");
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -57,9 +57,9 @@ Admin.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("Email and password are required");
   }
-  const user = await this.findOne({ email });
+  const admin = await this.findOne({ email });
 
-  if (!user) {
+  if (!admin) {
     throw Error("User not found");
   }
 
@@ -75,5 +75,14 @@ Admin.statics.login = async function (email, password) {
 Admin.statics.logout = async function () {
   return;
 };
-// Create and export the admin model
-module.exports = mongoose.model('Admin', adminSchema);
+
+
+Admin.statics.deleteUser = async function (userId) {
+  const user = await this.findByIdAndDelete(userId);
+  if (!user) {
+    throw Error("User not found");
+  }
+  return user;
+};
+
+module.exports = mongoose.model('Admin', Admin);

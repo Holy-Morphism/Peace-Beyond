@@ -28,9 +28,7 @@ const logInUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
-    //obtain id form ObjectId
     const id = user._id.toString();
-    //create token
     const token = createToken(id);
     res.cookie("jwt", token, {
       httpOnly: true,
