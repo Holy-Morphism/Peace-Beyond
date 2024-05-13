@@ -14,7 +14,8 @@ router.post("/signup", signupAdmin);
 // Log in route
 router.post("/login", loginAdmin);
 
-router.get("/admin", getAdmin);
+// get Admin
+router.get("/", getAdmin);
 
 // delete route
 router.delete("/delete", deleteAdmin);

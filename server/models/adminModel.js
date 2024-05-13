@@ -53,6 +53,7 @@ Admin.statics.signup = async function (firstName, lastName, email, password) {
 
   return admin;
 };
+
 Admin.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("Email and password are required");
