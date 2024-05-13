@@ -12,9 +12,9 @@ export const SignUpSchema = z.object(
             message:"Enter a proper name"
         }),
         password:z.string().min(8,{message:"Password must be at least 8 characters"}),
-        confirmPassword:z.string().min(8,{message:"Password must be at least 8 characters"})
-
-    }
+        confirmPassword:z.string().min(8,{message:"Password must be at least 8 characters"}),
+     
+  }
 );
 
 export const LogInSchema = z.object(
@@ -32,3 +32,30 @@ export const ForgetPasswordSchema = z.object(
         confirmPassword:z.string().min(8,{message:"Password must be at least 8 characters"})
     }
 );
+
+export const EmailSchema = z.object(
+  {
+      email:z.string().email({
+          message:"Come on, you know that's not a valid email."
+      })
+  }
+)
+  
+  export const FirstNameSchema =  z.object({
+    firstName:z.string().min(3, {
+      message: "Enter a proper name"
+    })
+  });
+
+  export const LastNameSchema = z.object({
+    lastName:z.string().min(3, {
+      message: "Enter a proper name"
+    })
+  });
+  
+  export const PasswordSchema = z.object({
+    password:z.string().min(8, {
+      message: "Password must be at least 8 characters"
+    })
+  });
+ 

@@ -1,5 +1,5 @@
 "use client";
-
+import { CldUploadWidget, CldImage, getCldImageUrl } from "next-cloudinary";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,6 @@ import { SignUpSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-
 import {
   Form,
   FormField,
@@ -21,8 +20,11 @@ import { z } from "zod";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import { signUp } from "@/api/auth";
+import Image from "next/image";
 
 export function SignUpForm() {
+  const [avatarURL, setAvatarURL] = useState("");
+
   const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(SignUpSchema),
@@ -36,10 +38,29 @@ export function SignUpForm() {
   });
   const { reset } = form;
 
-
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     setLoading(true);
+    const result = SignUpSchema.safeParse(data);
+    if (avatarURL === "/images/default.png") {
+      toast({
+        variant: "destructive",
+        title: "No Image Error",
+        description: "Please upload an image",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+      return;
+    }
+    if (!result.success) {
+      // Display the error message
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: result.error.message,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+      return;
+    }
     if (data.password !== data.confirmPassword) {
       toast({
         variant: "destructive",
@@ -56,8 +77,10 @@ export function SignUpForm() {
       });
     } else {
       const { confirmPassword, ...userData } = data;
-
-      const body = await signUp(userData);
+      const body = await signUp({ ...userData, avatarURL });
+      if (!body) {
+        return;
+      }
       console.log(body.error);
       if (body.status === "error") {
         toast({
@@ -67,7 +90,6 @@ export function SignUpForm() {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-
         toast({
           title: "Account Created 🎉",
           description: (
@@ -93,6 +115,30 @@ export function SignUpForm() {
 
   const { pending } = useFormStatus();
 
+  const renderFormField = (
+    control: any,
+    name: string,
+    label: string,
+    type: string,
+    placeholder: string
+  ) => {
+    return (
+      <FormField
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{label}</FormLabel>
+            <FormControl>
+              <Input {...field} type={type} placeholder={placeholder} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    );
+  };
+
   return (
     <CardWrapper
       label="Enter your information to create an account"
@@ -101,82 +147,79 @@ export function SignUpForm() {
       backButtonHref="/auth/login"
       backButtonLabel="Already have an account ? "
     >
+      <div className="flex justify-center rounded-full object-cover h-full">
+        {avatarURL === "" ? (
+          <Image
+            src={"/images/default.png"}
+            alt="Preview"
+            width={100}
+            height={100}
+            style={{ objectFit: "cover" }}
+            className="rounded-full"
+          />
+        ) : (
+          <CldImage
+            width="100"
+            height="100"
+            src={avatarURL}
+            sizes="100vw"
+            alt="Description of my image"
+            style={{ objectFit: "cover" }}
+            className="rounded-full"
+          />
+        )}
+      </div>
+      <CldUploadWidget
+        uploadPreset="profile_pictures"
+        onSuccess={(results) => {
+          console.log("Public ID", results.info.public_id);
+          setAvatarURL(results.info.public_id);
+        }}
+      >
+        {({ open }) => {
+          return <button onClick={() => open()}>Upload an Image</button>;
+        }}
+      </CldUploadWidget>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
           <div className="grid grid-cols-2 gap-2">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="name" placeholder="John" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="name" placeholder="Doe" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {renderFormField(
+              form.control,
+              "firstName",
+              "First name",
+              "name",
+              "John"
+            )}
+            {renderFormField(
+              form.control,
+              "lastName",
+              "Last name",
+              "name",
+              "Doe"
+            )}
           </div>
+          {renderFormField(
+            form.control,
+            "email",
+            "Email",
+            "email",
+            "email@company.com"
+          )}
+          {renderFormField(
+            form.control,
+            "password",
+            "Password",
+            "password",
+            "********"
+          )}
+          {renderFormField(
+            form.control,
+            "confirmPassword",
+            "Confirm Password",
+            "password",
+            "********"
+          )}
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="email"
-                    placeholder="hello@yellow.com"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" placeholder="********" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" placeholder="********" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <Button type="submit" className="w-full" disabled={pending}>
             {loading ? "Loading" : "Sign In"}
           </Button>

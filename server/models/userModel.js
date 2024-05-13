@@ -8,13 +8,18 @@ const User = new mongoose.Schema(
     lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    avatarURL: { type: String, required: true },
   },
   { collection: "users" }
 );
 
 // Static sign up method
-User.statics.signup = async function (firstName, lastName, email, password) {
+User.statics.signup = async function (firstName, lastName, email, password, avatarURL) {
   //validation
+  if (!avatarURL) {
+    throw Error("Profile picture is required");
+  }
+
   if (!email || !password || !firstName || !lastName) {
     throw Error("All fields are required");
   }
@@ -48,6 +53,7 @@ User.statics.signup = async function (firstName, lastName, email, password) {
     lastName,
     email,
     password: hashedPassword,
+    avatarURL,
   });
 
   return user;
@@ -84,5 +90,57 @@ User.statics.getUser = async function (id) {
   }
   return user;
 };
+
+User.statics.updateEmail = async function (id, newEmail) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.email = newEmail;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updateFirstName = async function (id, newFirstName) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.firstName = newFirstName;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updateLastName = async function (id, newLastName) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.lastName = newLastName;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updatePassword = async function (id, newPassword) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+  user.password = hashedPassword;
+  await user.save();
+
+  return user;
+};
+
 
 module.exports = mongoose.model("User", User);

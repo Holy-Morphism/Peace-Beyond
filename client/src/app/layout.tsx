@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import NavBar from "@/components/navbar/NavBar";
 import { Roboto } from "next/font/google";
 import Footer from "@/components/footer/Footer";
-
+import Gallery from "@/components/gallery/Gallery";
 const myFont = localFont({
   src: "../../public/fonts/CaniculeDisplayv0.1-Regular.Trial.otf",
   variable: "--font-CaniculeDisplay",
@@ -29,13 +29,13 @@ export default function RootLayout({
     <html lang="en" className="m-0 p-0" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen h-full bg-background antialiased",
+          "min-h-screen h-full bg-background antialiased bg-color1 text-color4",
           roboto,
           myFont.variable
         )}
       >
         {children}
-        <Footer />
+      
       </body>
     </html>
   );

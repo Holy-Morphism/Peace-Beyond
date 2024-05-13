@@ -24,6 +24,10 @@ const config = {
         CaniculeDisplay: ["var(--font-CaniculeDisplay)", ...fontFamily.serif],
       },
       colors: {
+        'color1': '#F9F7F7',
+        'color2': '#DBE2EF',
+        'color3': '#3F72AF',
+        'color4': '#112D4E',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

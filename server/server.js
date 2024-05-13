@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
+const destinationRoutes = require("./routes/destinationRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -30,6 +31,7 @@ mongoose
   });
 
 app.use("/api/user", userRoutes);
+app.use("/api/destination", destinationRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.listen(PORT, () => {
