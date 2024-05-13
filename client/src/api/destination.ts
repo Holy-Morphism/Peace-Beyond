@@ -9,12 +9,11 @@ export async function getDestinations() {
       },
     });
     const data = await res.json();
-    console.log(data)
     return data;
   }
 
 
-  export async function getDestination(id: number) {
+  export async function getDestination(id: string) {
     const res = await fetch(`http://localhost:8080/api/destination/${id}`, {
       method: "GET",
       cache: "no-store",
@@ -23,7 +22,6 @@ export async function getDestinations() {
       },
     });
     const data = await res.json();
-    console.log(data)
     return data;
   }
 

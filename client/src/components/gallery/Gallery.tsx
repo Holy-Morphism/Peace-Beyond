@@ -5,17 +5,17 @@
 // // import { getDestinations } from '@/api/destination';
 // //  export const houses=[
 // //   {
-// //     id:1,
-// //   image:"/images/Greece.avif",
-// //   price:1200,
-// //   title:"Europe, Greece"
-// // },
-// // {
-// //   id:2,
-// //   image:"/images/Aruba.avif",
-// //   price:1500,
-// //   title:"Americas, Aruba"
-// // },
+//     id:1,
+//   image:"/images/Greece.avif",
+//   price:1200,
+//   title:"Europe, Greece"
+// },
+// {
+//   id:2,
+//   image:"/images/Aruba.avif",
+//   price:1500,
+//   title:"Americas, Aruba"
+// },
 // {
 //   id:3,
 //   image:"/images/Pakistan.avif",
@@ -34,43 +34,43 @@
 //   title:"Africa, Angola"
 // },
 // {
-//   id:6,
+//   id:"6",
 //   image:"/images/Armenia.avif",
 //   price:1200,
 //   title:"Asia, Armenia"
 // },
 // {
-//   id:7,
+//   id:"7",
 //   image:"/images/Thailand.avif",
 //   price:1500,
 //   title:"Asia, Thailand"
 // },
 // {
-//   id:8,
+//   id:"8",
 //   image:"/images/India.avif",
 //   price:1000,
 //   title:"Asia, India"
 // },
 // {
-//   id:9,
+//   id:"9",
 //   image:"/images/Spain.avif",
 //   price:1300,
 //   title:"Europe, Spain"
 // },
 // {
-//   id:10,
+//   id:"10",
 //   image:"/images/Germany.avif",
 //   price:1400,
 //   title:"Europe, Germany"
 // },
 // {
-//   id:11,
+//   id:"11",
 //   image:"/images/France.avif",
 //   price:950,
 //   title:"Europe, France"
 // },
 // {
-//   id:12,
+//   id:"12",
 //   image:"/images/Italy.avif",
 //   price:100,
 //   title:"Europe, Italy"
@@ -135,7 +135,7 @@
 // export default Gallery
 
 import { getDestinations } from '@/api/destination';
-import House from '../house/House';
+import GalleryComponent from '../house/GalleryComponent';
 import Link from 'next/link';
 
 const  Gallery  = async () => {
@@ -144,9 +144,9 @@ const  Gallery  = async () => {
     return (
       <div className="pt-4">
         <div className='grid grid-cols-4 gap-4'>
-        { destination.map((destination: { id: number, title: string, image: string, price: number }) => (
+        { destination.map((destination: { id: string, title: string, image: string, price: number }) => (
           <Link key={destination.id} href={`/listings/${destination.id}`} passHref>
-            <House
+            <GalleryComponent
               title={destination.title}
               image={destination.image} 
               price={destination.price}
