@@ -1,8 +1,8 @@
 import Title from "@/components/Title";
 import React from "react";
-
 const Header = () => {
   return (
+    <>
     <main
       id="hero-section"
       className="h-full w-full flex flex-col items-center justify-center relative"
@@ -17,7 +17,10 @@ const Header = () => {
       />
 
       <Title className="text-white text-5xl fade-in-5 z-10 relative md:text-9xl" />
+      
     </main>
+    
+    </>
   );
 };
 
