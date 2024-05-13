@@ -7,7 +7,9 @@ interface Props {
     id: string;
 }
 
+
 export default function GalleryComponent({ title, price, image }: Props) {
+    
     return (
       <>
         <div className="house bg-white rounded-lg overflow-hidden shadow-sm transform transition-transform hover:scale-105">
