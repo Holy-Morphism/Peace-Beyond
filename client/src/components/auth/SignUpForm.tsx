@@ -119,13 +119,14 @@ export function SignUpForm() {
       backButtonHref="/auth/login"
       backButtonLabel="Already have an account ? "
     >
-      <div className="flex justify-center rounded-full object-cover">
+      <div className="flex justify-center rounded-full object-cover h-full">
         <Image
           src={avatarURL || ""}
           alt="Preview"
           width={100}
           height={100}
-          className="rounded-full object-cover"
+          style={{ objectFit: "cover" }}
+          className="rounded-full"
         />
       </div>
       <Form {...form}>
