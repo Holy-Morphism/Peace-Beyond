@@ -5,10 +5,9 @@ const Destination = async ({ params }: { params: { destination: string } }) => {
   const destination = await getDestination(params.destination);
   console.log(destination);
   return (
-    <div>
+    <>
       <Description {...destination.destination} />
-      <p>This is description These are the params : {params.destination}</p>
-    </div>
+    </>
   );
 };
 
