@@ -1,7 +1,5 @@
-import { getUser } from "@/api/auth"; // replace with your actual path
-import { Button } from "@/components/ui/button";
+import { getUser } from "@/api/user"; 
 import UserDashboard from "@/components/userdashboard/UserDashboard";
-import { userData } from "@/types"; // replace with your actual path
 
 const Dashboard = async () => {
   const res = await getUser();

@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
+const authRoutes = require("./routes/authenticationRoutes");
 const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -29,6 +30,7 @@ mongoose
     process.exit(1);
   });
 
+app.use("/api/auth",authRoutes );
 app.use("/api/user", userRoutes);
 app.use("/api/destination", destinationRoutes);
 

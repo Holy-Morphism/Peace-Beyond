@@ -1,11 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+
 import {
   Form,
   FormField,
@@ -29,6 +29,9 @@ interface UpdateFormFieldProps {
 
 const UpdateFormField = (props: UpdateFormFieldProps) => {
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
   //for Validation
   const form = useForm({
     resolver: zodResolver(props.schema),
@@ -43,6 +46,7 @@ const UpdateFormField = (props: UpdateFormFieldProps) => {
     const res = await props.submit(data);
     console.log(`res ${res}`);
     setLoading(false);
+    router.refresh();
   };
 
   return (

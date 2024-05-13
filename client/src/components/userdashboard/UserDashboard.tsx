@@ -1,8 +1,6 @@
 "use client";
 import { CldUploadWidget, CldImage, getCldImageUrl } from "next-cloudinary";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
+
 import {
   FirstNameSchema,
   LastNameSchema,
@@ -16,8 +14,7 @@ import {
   updateLastname,
   updateEmail,
   updatePassword,
-} from "@/api/auth";
-import Image from "next/image";
+} from "@/api/user";
 
 import {
   Card,
