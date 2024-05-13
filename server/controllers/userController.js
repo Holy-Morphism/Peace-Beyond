@@ -73,4 +73,45 @@ const logOutUser = async (req, res) => {
   }
 };
 
-module.exports = { signUpUser, logInUser, getUser, logOutUser };
+
+const updateEmail = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const user = await User.updateEmail(decoded.id, req.body.email);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const user = await User.updatePassword(decoded.id, req.body.password);
+    res.json(user);
+  } catch (error) {
+    res.json({ status: "error", error: error.message });
+  }
+};
+
+const updateFirstName = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const user = await User.updateFirstName(decoded.id, req.body.firstName);
+    res.json(user);
+  } catch (error) {
+    res.json({ status: "error", error: error.message });
+  }
+};
+
+const updateLastName = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const user = await User.updateLastName(decoded.id, req.body.lastName);
+    res.json(user);
+  } catch (error) {
+    res.json({ status: "error", error: error.message });
+  }
+};
+
+module.exports = { signUpUser, logInUser, getUser, logOutUser, updateEmail, updatePassword, updateFirstName, updateLastName };

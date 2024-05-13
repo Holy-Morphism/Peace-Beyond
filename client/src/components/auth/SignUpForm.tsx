@@ -18,7 +18,7 @@ import {
 import CardWrapper from "./card-wrapper";
 import { z } from "zod";
 import { useFormStatus } from "react-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { signUp } from "@/api/auth";
 import Image from "next/image";
 

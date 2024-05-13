@@ -20,17 +20,17 @@ const SideBar = () => {
         <SideBarButton
           icon={<IoIosSettings />}
           name="General"
-          href="/dashboard"
+          href="/userdashboard"
         />
         <SideBarButton
           icon={<FaClipboardList />}
           name="Orders"
-          href="/dashboard/orders"
+          href="/userdashboard/orders"
         />
         <SideBarButton
           icon={<FaHeart />}
           name="Favourites"
-          href="/dashboard/favourites"
+          href="/userdashboard/favourites"
         />
         <SideBarButton
           icon={<IoMdExit />}

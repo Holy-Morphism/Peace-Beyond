@@ -91,4 +91,56 @@ User.statics.getUser = async function (id) {
   return user;
 };
 
+User.statics.updateEmail = async function (id, newEmail) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.email = newEmail;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updateFirstName = async function (id, newFirstName) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.firstName = newFirstName;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updateLastName = async function (id, newLastName) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  user.lastName = newLastName;
+  await user.save();
+
+  return user;
+};
+
+User.statics.updatePassword = async function (id, newPassword) {
+  const user = await this.findById(id);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+  user.password = hashedPassword;
+  await user.save();
+
+  return user;
+};
+
+
 module.exports = mongoose.model("User", User);

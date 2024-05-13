@@ -9,10 +9,10 @@ const Dashboard = async () => {
   if (res && res.status !== "error") {
   }
 
-  console.log(res.user.firstName);
+  const user = res.user;
   return (
-    <div className="">
-      <UserDashboard firstName={res.user.firstName} lastName={res.user.lastName} />
+    <div>
+      <UserDashboard {...user} />
     </div>
   );
 };
