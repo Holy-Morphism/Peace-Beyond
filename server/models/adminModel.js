@@ -44,14 +44,14 @@ Admin.statics.signup = async function (firstName, lastName, email, password) {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const user = await this.create({
+  const admin = await this.create({
     firstName,
     lastName,
     email,
     password: hashedPassword,
   });
 
-  return user;
+  return admin;
 };
 Admin.statics.login = async function (email, password) {
   if (!email || !password) {
@@ -60,29 +60,37 @@ Admin.statics.login = async function (email, password) {
   const admin = await this.findOne({ email });
 
   if (!admin) {
-    throw Error("User not found");
+    throw Error("Admin not found");
   }
 
-  const match = await bcrypt.compare(password, user.password);
+  const match = await bcrypt.compare(password, admin.password);
 
   if (!match) {
     throw Error("Incorrect password");
   }
 
-  return user;
+  return admin;
 };
 
 Admin.statics.logout = async function () {
   return;
 };
 
+Admin.statics.getAdmin = async function (id) {
+  const admin = await this.findById(id);
+  if (!admin) {
+    throw Error("Admin not found");
+  }
+  return admin;
+};
 
-Admin.statics.deleteUser = async function (userId) {
-  const user = await this.findByIdAndDelete(userId);
-  if (!user) {
+
+Admin.statics.deleteUser = async function (adminId) {
+  const admin = await this.findByIdAndDelete(adminId);
+  if (!admin) {
     throw Error("User not found");
   }
-  return user;
+  return admin;
 };
 
 module.exports = mongoose.model('Admin', Admin);

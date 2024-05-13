@@ -78,8 +78,28 @@ const signupAdmin = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
+const getAdmin = async (req, res) => {
+    const cookie = req.cookies.jwt;
+    //check if jwt cookie exists
+    console.log(cookie);
+    try {
+      if (cookie) {
+        console.log("cookie");
+        const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
+        const admin = await Admin.getAdmin(decoded.id);
+        res.json({ status: "ok", admin });
+      } else {
+        res.json({ status: "error", error: "admin not authenticated" });
+      }
+    } catch (error) {
+      res.json({ status: "error", error: error.message });
+    }
+  };
 module.exports = {
     loginAdmin,
     deleteAdmin,
     signupAdmin,
+    getAdmin,
 };
