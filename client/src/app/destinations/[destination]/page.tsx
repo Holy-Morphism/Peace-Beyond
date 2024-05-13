@@ -6,8 +6,8 @@ const Destination = async ({ params }: { params: { destination: string } }) => {
   console.log(destination);
   return (
     <div>
-      <Description {...destination.destination} />
       <p>This is description These are the params : {params.destination}</p>
+      <Description {...destination.destination} />
     </div>
   );
 };
