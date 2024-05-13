@@ -143,9 +143,9 @@ const  Gallery  = async () => {
   const destination =  res.destinations;
     return (
       <div className="pt-4">
-        <div className='grid grid-cols-4 gap-4'>
+        <div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         { destination.map((destination: { id: string, title: string, image: string, price: number }) => (
-          <Link key={destination.id} href={`/listings/${destination.id}`} passHref>
+          <Link key={destination.id} href={`/destinations/${destination.id}`} passHref>
             <GalleryComponent
               title={destination.title}
               image={destination.image} 
