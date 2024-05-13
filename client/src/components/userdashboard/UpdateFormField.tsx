@@ -49,7 +49,7 @@ const UpdateFormField = (props: UpdateFormFieldProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-2 items-end"
+        className="grid grid-cols-2 gap-2 items-end gap-y-10"
       >
         <FormField
           control={form.control}
@@ -68,7 +68,7 @@ const UpdateFormField = (props: UpdateFormFieldProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full bg-color4 text-color2">
           {loading ? "Loading" : "Update"}
         </Button>
       </form>
