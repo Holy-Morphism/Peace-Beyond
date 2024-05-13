@@ -15,7 +15,7 @@ const Destination = new mongoose.Schema(
 );
 
 Destination.statics.getDestinations = async function () {
-  const destinations = await this.find({},'id title price image');
+  const destinations = await this.find({}, "id title price image");
   return destinations;
 };
 
@@ -25,13 +25,23 @@ Destination.statics.getDestination = async function (id) {
 };
 
 Destination.statics.addDestination = async function (destination) {
-    const newDestination = await this.create(destination);
-    return newDestination;
-    }
+  const newDestination = await this.create(destination);
+  return newDestination;
+};
 
 Destination.statics.deleteDestination = async function (id) {
-    const destination = await this.findOneAndDelete({ id });
-    return destination;
-}
+  const destination = await this.findOneAndDelete({ id });
+  return destination;
+};
+
+Destination.statics.getDestinationsForPagination = async function (
+  skip,
+  limit
+) {
+  const destinations = await this.find({}, "id title price image")
+    .skip(skip)
+    .limit(limit);
+  return destinations;
+};
 
 module.exports = mongoose.model("Destination", Destination);

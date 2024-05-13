@@ -39,9 +39,23 @@ const deleteDestination = async (req, res) => {
     }
 }
 
+const getDestinationsSkipAndLimit = async (req, res) => {
+    const skip = parseInt(req.query.skip);
+    const limit = parseInt(req.query.limit);
+    console.log(req.query);
+    try {
+        const destinations = await Destination.getDestinationsForPagination(skip,limit);
+        res.json({ status: 'ok', destinations });
+    } catch (error) {
+        console.log(error.message);
+        res.json({ status: 'error', error: error.message });
+    }
+}
+
 module.exports = {
     getDestinations,
     getDestination,
     addDestination,
     deleteDestination,
+    getDestinationsSkipAndLimit
 }

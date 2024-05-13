@@ -6,6 +6,7 @@ const {
   getDestination,
   addDestination,
   deleteDestination,
+  getDestinationsSkipAndLimit,
 } = require("../controllers/destinationController");
 
 // Get all destinations
@@ -19,5 +20,7 @@ router.post("/", addDestination);
 
 // Delete a destination
 router.delete("/:id", deleteDestination);
+
+router.get("/page", getDestinationsSkipAndLimit);
 
 module.exports = router;
