@@ -12,9 +12,19 @@ export async function signUp(userData:userData) {
     },
     body: JSON.stringify(userData),
   });
-  return  await res.json();
-   
-   
+  const data = await res.json();
+  cookies().set({
+      name: 'jwt',
+      value: data.token,
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      path: '/',
+    })
+  console.log(data);
+  if (data.status === "ok") {
+      redirect("/dashboard");
+  }
+  return data;
 }
 
 export async function login(loginData:loginData) {

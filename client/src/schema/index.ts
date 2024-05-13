@@ -1,14 +1,5 @@
 import * as z from 'zod';
 
-const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
-
-const fileSchema = z.object({
-  type: z.string().refine(type => SUPPORTED_FORMATS.includes(type), {
-    message: 'Unsupported file format',
-  }),
-  // Add other file properties here if needed
-});
-
 export const SignUpSchema = z.object(
     {
         email:z.string().email({
@@ -22,8 +13,8 @@ export const SignUpSchema = z.object(
         }),
         password:z.string().min(8,{message:"Password must be at least 8 characters"}),
         confirmPassword:z.string().min(8,{message:"Password must be at least 8 characters"}),
-        profilePicture: fileSchema,
-    }
+     
+  }
 );
 
 export const LogInSchema = z.object(

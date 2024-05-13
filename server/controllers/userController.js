@@ -7,9 +7,10 @@ const createToken = (id) => {
 };
 
 const signUpUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password ,avatarURL} = req.body;
+  console.log(req.body);
   try {
-    const user = await User.signup(firstName, lastName, email, password);
+    const user = await User.signup(firstName, lastName, email, password,avatarURL);
     //convert ObjectID to string
     const id = user._id.toString();
     // Create a token

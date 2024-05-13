@@ -3,6 +3,7 @@ export interface userData {
     lastName: string;
     email: string;
     password: string;
+    avatarURL: string;
     }
 
 export interface loginData {
