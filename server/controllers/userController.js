@@ -2,9 +2,8 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs"); // For password hashing
 const jwt = require("jsonwebtoken");
 
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "3d" });
-};
+const { createToken } = require("../utils/utils");
+
 
 const signUpUser = async (req, res) => {
   const { firstName, lastName, email, password ,avatarURL} = req.body;

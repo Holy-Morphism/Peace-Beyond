@@ -1,6 +1,7 @@
 const Admin = require("../models/adminModel");
 const bcrypt = require("bcryptjs"); // For password hashing
 const jwt = require("jsonwebtoken");
+const { createToken } = require("../utils/utils");
 
 const loginAdmin = async (req, res) => {
   try {
