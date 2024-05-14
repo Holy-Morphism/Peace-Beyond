@@ -4,6 +4,7 @@ const Reservation = new mongoose.Schema(
   {
     destinationID: { type: String },
     userID: { type: String, required: true, unique: true },
+    date: { type: Date, default: Date.now },
   },
   { collection: "reservation" }
 );
