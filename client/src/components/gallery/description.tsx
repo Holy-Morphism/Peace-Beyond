@@ -21,7 +21,7 @@ const Description = (prop: Destination) => {
   const destination = prop;
   return (
     <>
-      <div className="flex flex-col mt-16 absolute left-0 top-0  mb-5 h-auto w-full">
+      <div className="flex flex-col mt-16 absolute left-0 top-0 mx-9 mb-5 h-auto w-full">
         <HouseImage image={destination.image} />
       </div>
       <div className="grid grid-cols-2 gap-14 absolute bottom-0 w-full place-items-center ">
