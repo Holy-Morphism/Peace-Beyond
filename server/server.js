@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const authRoutes = require("./routes/authenticationRoutes");
 const reservationRoutes = require("./routes/reservationRoutes")
 const cookieParser = require("cookie-parser");
@@ -34,6 +35,7 @@ mongoose
 app.use("/api/auth",authRoutes );
 app.use("/api/user", userRoutes);
 app.use("/api/destination", destinationRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/reservation", reservationRoutes);
 
 app.listen(PORT, () => {

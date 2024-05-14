@@ -1,6 +1,4 @@
-import { getDestinationPagination } from "@/api/destination";
-import GalleryComponent from "@/components/house/GalleryComponent";
-import Link from "next/link";
+import Gallery from '@/components/gallery/Gallery'
 
 const Destinations = async ({ params }:{ params: { page: string }}) => {
   let page = Number(params?.page || 1);
