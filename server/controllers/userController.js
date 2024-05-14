@@ -25,8 +25,7 @@ const updateEmail = async (req, res) => {
     const user = await User.updateEmail(decoded.id, req.body.email);
     res.json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    res.json({ status: "error", error: error.message });  }
 };
 
 const updatePassword = async (req, res) => {

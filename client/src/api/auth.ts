@@ -81,3 +81,16 @@ export async function logout() {
       });
       return res.json();
       }
+
+      export async function getRole() {
+        const res = await fetch("http://localhost:8080/api/auth/role", {
+            method: "GET",
+            cache: "no-store",
+            credentials: "include",
+            headers: {
+            Cookie: cookies().toString(),
+            "Content-Type": "application/json",
+            },
+        });
+        return res.json();
+        }

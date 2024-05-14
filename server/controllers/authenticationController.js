@@ -1,5 +1,4 @@
 const User = require("../models/userModel");
-const bcrypt = require("bcryptjs"); // For password hashing
 const jwt = require("jsonwebtoken");
 
 const createToken = (id) => {
@@ -56,4 +55,20 @@ const logOutUser = async (req, res) => {
     }
   };
 
-  module.exports = { signUpUser, logInUser, logOutUser };
+  const getRole = async (req, res) => { 
+    try {
+      const cookie = req.cookies.jwt;
+      if (cookie) {
+        const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
+        const user = await User.getUser(decoded.id);
+        res.json({ status: "ok", role: user.role });
+      } else {
+        res.json({ status: "error", error: "User not authenticated" });
+      }
+    } catch (error) {
+      res.json({ status: "error", error: error.message });
+    }
+  }
+
+
+  module.exports = { signUpUser, logInUser, logOutUser,getRole };

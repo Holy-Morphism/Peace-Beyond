@@ -142,5 +142,9 @@ User.statics.updatePassword = async function (id, newPassword) {
   return user;
 };
 
+User.statics.findUserById = async function (id) {
+  const user = await this.findById(id);
+  return !!user;
+};
 
 module.exports = mongoose.model("User", User);
