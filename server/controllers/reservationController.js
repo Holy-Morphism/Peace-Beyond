@@ -1,4 +1,4 @@
-const reservation = require("../models/ordersModel");
+const reservation = require("../models/reservationModel");
 const Destination = require("../models/destinationModel");
 const jwt = require("jsonwebtoken");
 

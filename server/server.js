@@ -5,6 +5,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
 const authRoutes = require("./routes/authenticationRoutes");
+const reservationRoutes = require("./routes/reservationRoutes")
 const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -33,6 +34,7 @@ mongoose
 app.use("/api/auth",authRoutes );
 app.use("/api/user", userRoutes);
 app.use("/api/destination", destinationRoutes);
+app.use("/api/reservation", reservationRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

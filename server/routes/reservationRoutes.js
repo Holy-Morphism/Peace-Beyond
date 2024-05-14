@@ -3,8 +3,10 @@ const router = express.Router();
 
 const {
     saveReservation,
-} = require("../controllers/ordersController");
+} = require("../controllers/reservationController");
 
 // Sign in route , creating user
-router.post("/saveReservation", saveReservation);
+router.post("/create", saveReservation);
+
 module.exports = router;
+
