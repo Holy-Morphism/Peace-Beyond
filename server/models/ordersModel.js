@@ -1,17 +1,20 @@
-const mongoose=require('mongoose');
-const reservation = new mongoose.Schema({
-    id: String,
-    title: String,
-    host: String,
-    price: Number,
-    description: String,
-    from: Date,
-    to: Date,
-  });
+const mongoose = require("mongoose");
 
-reservation.statics.saveReservation = async function (data) {
-    const reservation = new this.insertMany(data);
-    return reservation.save();
-  };
+const Reservation = new mongoose.Schema(
+  {
+    destinationID: { type: String },
+    userID: { type: String, required: true, unique: true },
+  },
+  { collection: "reservation" }
+);
 
-module.exports = mongoose.model('Reservation', reservation);
+Reservation.statics.saveReservation = async function (destinationID, userID) {
+  if (!destinationID || !userID) {
+    throw("Missing IDs")
+  }
+
+  const reservation = await this.create(destinationID, userID);
+  return reservation;
+};
+
+module.exports = mongoose.model("Reservation", Reservation);

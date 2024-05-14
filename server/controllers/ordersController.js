@@ -1,11 +1,24 @@
-const reservation = require('../models/ordersModel');
+const reservation = require("../models/ordersModel");
+const Destination = require("../models/destinationModel");
+const jwt = require("jsonwebtoken");
+
 const saveReservation = async (req, res) => {
-    const reservations = req.body;
-    try {
-        const reservedData = await reservation.saveReservation(reservations);
-        res.json({ status: 'ok', reservedData });
-    } catch (error) {
-        res.json({ status: 'error', error: error.message });
+  const cookie = req.cookies.jwt;
+  const id = req.body;
+  try {
+    if (cookie) {
+      const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
+      const dest = await Destination.getDestination(id);
+      const reservedData = await reservation.saveReservation(
+        dest._id,
+        decoded.id
+      );
+      res.json({ status: "ok", reservedData });
+    } else {
+      res.json({ status: "error", error: "User not authenticated" });
     }
-}
-module.exports = {saveReservation}
+  } catch (error) {
+    res.json({ status: "error", error: error.message });
+  }
+};
+module.exports = { saveReservation };
