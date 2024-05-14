@@ -4,6 +4,7 @@ import SideBarButton from "./SideBarButton";
 import { IoIosSettings, IoMdExit } from "react-icons/io";
 import { FaClipboardList, FaHeart } from "react-icons/fa";
 import { logout } from "@/api/auth";
+import { HomeIcon } from "lucide-react";
 
 const SideBar = () => {
   const handlelogout = async () => {
@@ -17,6 +18,11 @@ const SideBar = () => {
   return (
     <div className="h-full w-1/5 bg-color3">
       <div className="flex flex-col justify-center items-center">
+      <SideBarButton
+          icon={<HomeIcon />}
+          name="Home"
+          href="/"
+        />
         <SideBarButton
           icon={<IoIosSettings />}
           name="General"

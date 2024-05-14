@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
-import NavBar from "@/components/navbar/NavBar";
 import { Roboto } from "next/font/google";
 import Footer from "@/components/footer/Footer";
-import Gallery from "@/components/gallery/Gallery";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 const myFont = localFont({
   src: "../../public/fonts/CaniculeDisplayv0.1-Regular.Trial.otf",
   variable: "--font-CaniculeDisplay",
