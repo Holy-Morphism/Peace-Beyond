@@ -1,15 +1,22 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const Admin = require("../models/adminModel");
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 };
 
 const signUpUser = async (req, res) => {
-  const { firstName, lastName, email, password ,avatarURL} = req.body;
+  const { firstName, lastName, email, password, avatarURL } = req.body;
   console.log(req.body);
   try {
-    const user = await User.signup(firstName, lastName, email, password,avatarURL);
+    const user = await User.signup(
+      firstName,
+      lastName,
+      email,
+      password,
+      avatarURL
+    );
     //convert ObjectID to string
     const id = user._id.toString();
     // Create a token
@@ -43,32 +50,38 @@ const logInUser = async (req, res) => {
 };
 
 const logOutUser = async (req, res) => {
-    try {
-      res.cookie("jwt", "", { maxAge: 0 });
-      res.json({ status: "ok" });
-      console.log("User logged out successfully");
-    } catch (error) {
-      console.error("An error occurred during logout:", error);
-      res
-        .status(500)
-        .json({ status: "error", message: "An error occurred during logout" });
-    }
-  };
-
-  const getRole = async (req, res) => { 
-    try {
-      const cookie = req.cookies.jwt;
-      if (cookie) {
-        const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
-        const user = await User.getUser(decoded.id);
-        res.json({ status: "ok", role: user.role });
-      } else {
-        res.json({ status: "error", error: "User not authenticated" });
-      }
-    } catch (error) {
-      res.json({ status: "error", error: error.message });
-    }
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.json({ status: "ok" });
+    console.log("User logged out successfully");
+  } catch (error) {
+    console.error("An error occurred during logout:", error);
+    res
+      .status(500)
+      .json({ status: "error", message: "An error occurred during logout" });
   }
+};
 
+const getRole = async (req, res) => {
+  try {
+    const cookie = req.cookies.jwt;
+    if (cookie) {
+      const decoded = jwt.verify(cookie, process.env.JWT_SECRET);
+      const user = await User.findUserById(decoded.id);
+      const admin = await Admin.findUserById(decoded.id);
+      if (user) {
+        res.json({ status: "ok", role: "user" });
+      }
+      if (admin) {
+        res.json({ status: "ok", role: "admin" });
+      }
+      res.json({ status: "ok", role: "guest" });
+    } else {
+      res.json({ status: "error", error: "User not authenticated" });
+    }
+  } catch (error) {
+    res.json({ status: "error", error: error.message });
+  }
+};
 
-  module.exports = { signUpUser, logInUser, logOutUser,getRole };
+module.exports = { signUpUser, logInUser, logOutUser, getRole };
