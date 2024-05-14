@@ -51,7 +51,7 @@ Admin.statics.login = async function (username, password) {
   return admin;
 };
 
-User.statics.findAdminById = async function (id) {
+Admin.statics.findAdminById = async function (id) {
   const admin = await this.findById(id);
   return !!admin;
 };
